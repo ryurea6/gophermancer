@@ -34,34 +34,34 @@ Tasks are grouped into phases. Each task is small enough to complete and verify 
 
 ## Phase 4: MCP Server Foundation
 
-- [ ] **T4.1**: Write `src/mcp/server.js` with JSON-RPC stdio transport. Read from stdin line-by-line, parse JSON-RPC requests, dispatch to handlers, write JSON-RPC responses to stdout.
-- [ ] **T4.2**: Implement `initialize` and `tools/list` handlers. Return tool schemas for `gopher_browse`, `gopher_fetch`, `gopher_search`, `gopher_spelunk`.
-- [ ] **T4.3**: Write a manual test: run `node src/mcp/server.js`, send `{"jsonrpc":"2.0","method":"tools/list","id":1}` on stdin, verify the response includes all four tools.
-- [ ] **T4.4**: Implement JSON-RPC error handling. If a request is malformed or a method is not found, return a JSON-RPC error response.
+- [x] **T4.1**: Write `src/mcp/server.js` with JSON-RPC stdio transport. Read from stdin line-by-line, parse JSON-RPC requests, dispatch to handlers, write JSON-RPC responses to stdout.
+- [x] **T4.2**: Implement `initialize` and `tools/list` handlers. Return tool schemas for `gopher_browse`, `gopher_fetch`, `gopher_search`, `gopher_spelunk`.
+- [x] **T4.3**: Write a manual test: run `node src/mcp/server.js`, send `{"jsonrpc":"2.0","method":"tools/list","id":1}` on stdin, verify the response includes all four tools.
+- [x] **T4.4**: Implement JSON-RPC error handling. If a request is malformed or a method is not found, return a JSON-RPC error response.
 
 ## Phase 5: MCP Tools
 
-- [ ] **T5.1**: Write `src/mcp/tools.js` with `gopherBrowse(url)` function. Parse URL, fetch menu, parse menu, return array of items.
-- [ ] **T5.2**: Integrate `gopherBrowse` into MCP server. Handle `tools/call` for `gopher_browse`.
-- [ ] **T5.3**: Write tests for `gopherBrowse` in `test/mcp/tools.test.js`. Start in-process Gopher server, call `gopherBrowse`, verify returned items.
-- [ ] **T5.4**: Write `gopherFetch(url)` in `tools.js`. Fetch text document, parse text, return string (without terminator).
-- [ ] **T5.5**: Integrate `gopherFetch` into MCP server. Write tests.
-- [ ] **T5.6**: Write `gopherSearch(url, query)` in `tools.js`. Append `\t{query}` to selector, fetch menu, return items.
-- [ ] **T5.7**: Integrate `gopherSearch` into MCP server. Write tests.
-- [ ] **T5.8**: Handle tool errors in `tools.js`. If fetch fails, return error object with descriptive message. MCP server wraps it in JSON-RPC error.
+- [x] **T5.1**: Write `src/mcp/tools.js` with `gopherBrowse(url)` function. Parse URL, fetch menu, parse menu, return array of items.
+- [x] **T5.2**: Integrate `gopherBrowse` into MCP server. Handle `tools/call` for `gopher_browse`.
+- [x] **T5.3**: Write tests for `gopherBrowse` in `test/mcp/tools.test.js`. Start in-process Gopher server, call `gopherBrowse`, verify returned items.
+- [x] **T5.4**: Write `gopherFetch(url)` in `tools.js`. Fetch text document, parse text, return string (without terminator).
+- [x] **T5.5**: Integrate `gopherFetch` into MCP server. Write tests.
+- [x] **T5.6**: Write `gopherSearch(url, query)` in `tools.js`. Append `\t{query}` to selector, fetch menu, return items.
+- [x] **T5.7**: Integrate `gopherSearch` into MCP server. Write tests.
+- [x] **T5.8**: Handle tool errors in `tools.js`. If fetch fails, return error object with descriptive message. MCP server wraps it in JSON-RPC error.
 
 ## Phase 6: Spelunker
 
-- [ ] **T6.1**: Write `src/crawl/spelunker.js` with `spelunk(startUrl, maxDepth, maxVisits)` function. Initialize queue with `{ url, depth: 0 }`, visited set, results array.
-- [ ] **T6.2**: Implement BFS loop. Dequeue, check visited, fetch item, record result, enqueue children if depth < maxDepth.
-- [ ] **T6.3**: Implement visit limit. Stop when `visited.size >= maxVisits`.
-- [ ] **T6.4**: Implement cycle detection. Do not visit a URL twice.
-- [ ] **T6.5**: Record outbound links for each visited item (all menu items, not just directories).
-- [ ] **T6.6**: Return `SpelunkResult` with `visited` array and `stats` object.
-- [ ] **T6.7**: Write tests for spelunker in `test/crawl/spelunker.test.js`. Build a test gopherhole with directories and subdirectories, crawl with depth 1, verify only one level is visited.
-- [ ] **T6.8**: Write tests for visit limit. Crawl with limit 3, verify only 3 URLs are visited.
-- [ ] **T6.9**: Write tests for cycle detection. Build a gopherhole with circular link (A -> B -> A), crawl, verify each URL visited once.
-- [ ] **T6.10**: Integrate spelunker into MCP server. Implement `gopher_spelunk` tool, write tests.
+- [x] **T6.1**: Write `src/crawl/spelunker.js` with `spelunk(startUrl, maxDepth, maxVisits)` function. Initialize queue with `{ url, depth: 0 }`, visited set, results array.
+- [x] **T6.2**: Implement BFS loop. Dequeue, check visited, fetch item, record result, enqueue children if depth < maxDepth.
+- [x] **T6.3**: Implement visit limit. Stop when `visited.size >= maxVisits`.
+- [x] **T6.4**: Implement cycle detection. Do not visit a URL twice.
+- [x] **T6.5**: Record outbound links for each visited item (all menu items, not just directories).
+- [x] **T6.6**: Return `SpelunkResult` with `visited` array and `stats` object.
+- [x] **T6.7**: Write tests for spelunker in `test/crawl/spelunker.test.js`. Build a test gopherhole with directories and subdirectories, crawl with depth 1, verify only one level is visited.
+- [x] **T6.8**: Write tests for visit limit. Crawl with limit 3, verify only 3 URLs are visited.
+- [x] **T6.9**: Write tests for cycle detection. Build a gopherhole with circular link (A -> B -> A), crawl, verify each URL visited once.
+- [x] **T6.10**: Integrate spelunker into MCP server. Implement `gopher_spelunk` tool, write tests.
 
 ## Phase 7: Terminal UI
 
