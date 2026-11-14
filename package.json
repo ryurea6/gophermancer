@@ -1,0 +1,34 @@
+{
+  "name": "gophermancer",
+  "version": "1.0.0",
+  "description": "Bridge between the 1991 Gopher protocol (RFC 1436) and the 2024 Model Context Protocol (MCP). Resurrects Gopherspace for AI agents.",
+  "type": "module",
+  "main": "src/mcp/server.js",
+  "bin": {
+    "gophermancer": "src/mcp/server.js",
+    "gophermancer-terminal": "src/ui/terminal.js",
+    "gophermancer-static": "src/ui/static.js"
+  },
+  "scripts": {
+    "test": "node --test 'test/**/*.test.js'",
+    "mcp": "node src/mcp/server.js",
+    "terminal": "node src/ui/terminal.js",
+    "static": "node src/ui/static.js"
+  },
+  "keywords": [
+    "gopher",
+    "mcp",
+    "model-context-protocol",
+    "ai-agent",
+    "rfc1436",
+    "necromancer",
+    "gopherspace"
+  ],
+  "author": "Gophermancer Team",
+  "license": "MIT",
+  "engines": {
+    "node": ">=22.0.0"
+  },
+  "dependencies": {},
+  "devDependencies": {}
+}

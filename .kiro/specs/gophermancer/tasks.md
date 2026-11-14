@@ -65,39 +65,39 @@ Tasks are grouped into phases. Each task is small enough to complete and verify 
 
 ## Phase 7: Terminal UI
 
-- [ ] **T7.1**: Write `src/ui/terminal.js` with a main loop. Accept a Gopher URL as a command-line argument. Fetch and display the menu.
-- [ ] **T7.2**: Implement menu rendering with ANSI colors and Unicode symbols. Display item numbers for selectable items, no number for type `i`.
-- [ ] **T7.3**: Implement user input. Use `node:readline` to prompt for item number. Fetch and display selected item.
-- [ ] **T7.4**: Handle directory navigation. If selected item is type 1, fetch submenu and display.
-- [ ] **T7.5**: Handle text display. If selected item is type 0, fetch text and display line-by-line.
-- [ ] **T7.6**: Handle search. If selected item is type 7, prompt for query, submit, display results.
-- [ ] **T7.7**: Handle errors gracefully. If fetch fails, display error message and return to menu.
-- [ ] **T7.8**: Implement quit command. If user enters `q`, exit.
-- [ ] **T7.9**: Manual test: run `node src/ui/terminal.js gopher://localhost:7070/1/`, verify menu displays, navigate to a submenu, fetch a text file.
+- [x] **T7.1**: Write `src/ui/terminal.js` with a main loop. Accept a Gopher URL as a command-line argument. Fetch and display the menu.
+- [x] **T7.2**: Implement menu rendering with ANSI colors and Unicode symbols. Display item numbers for selectable items, no number for type `i`.
+- [x] **T7.3**: Implement user input. Use `node:readline` to prompt for item number. Fetch and display selected item.
+- [x] **T7.4**: Handle directory navigation. If selected item is type 1, fetch submenu and display.
+- [x] **T7.5**: Handle text display. If selected item is type 0, fetch text and display line-by-line.
+- [x] **T7.6**: Handle search. If selected item is type 7, prompt for query, submit, display results.
+- [x] **T7.7**: Handle errors gracefully. If fetch fails, display error message and return to menu.
+- [x] **T7.8**: Implement quit command. If user enters `q`, exit.
+- [x] **T7.9**: Manual test: run `node src/ui/terminal.js gopher://localhost:7070/1/`, verify menu displays, navigate to a submenu, fetch a text file.
 
 ## Phase 8: Static HTML Generator
 
-- [ ] **T8.1**: Write `src/ui/static.js` with `generateHtml(url)` function. Fetch menu, render as HTML with embedded CSS.
-- [ ] **T8.2**: Implement CSS necromancer theme: dark background, green text, amber links, gothic font.
-- [ ] **T8.3**: Render menu items as list. Type `i` and type `3` have no link, others are anchor tags with `href="gopher://..."`.
-- [ ] **T8.4**: Add Unicode symbols for item types (same as terminal UI).
-- [ ] **T8.5**: Handle errors. If fetch fails, generate HTML with error message.
-- [ ] **T8.6**: Write main CLI. Accept URL as command-line argument, call `generateHtml(url)`, write to stdout.
-- [ ] **T8.7**: Write tests for static generator in `test/ui/static.test.js`. Generate HTML, verify it is valid HTML, verify CSS is present, verify links are correct.
-- [ ] **T8.8**: Manual test: run `node src/ui/static.js gopher://localhost:7070/1/ > out.html`, open in browser, verify appearance and links.
+- [x] **T8.1**: Write `src/ui/static.js` with `generateHtml(url)` function. Fetch menu, render as HTML with embedded CSS.
+- [x] **T8.2**: Implement CSS necromancer theme: dark background, green text, amber links, gothic font.
+- [x] **T8.3**: Render menu items as list. Type `i` and type `3` have no link, others are anchor tags with `href="gopher://..."`.
+- [x] **T8.4**: Add Unicode symbols for item types (same as terminal UI).
+- [x] **T8.5**: Handle errors. If fetch fails, generate HTML with error message.
+- [x] **T8.6**: Write main CLI. Accept URL as command-line argument, call `generateHtml(url)`, write to stdout.
+- [x] **T8.7**: Write tests for static generator in `test/ui/static.test.js`. Generate HTML, verify it is valid HTML, verify CSS is present, verify links are correct.
+- [x] **T8.8**: Manual test: run `node src/ui/static.js gopher://localhost:7070/1/ > out.html`, open in browser, verify appearance and links.
 
 ## Phase 9: Integration and Polish
 
-- [ ] **T9.1**: Create `package.json` with metadata (name, version, description, author, license). Leave `dependencies: {}` empty. Add `scripts` for running tests.
-- [ ] **T9.2**: Write `README.md` with installation instructions, usage examples for MCP server, terminal UI, and static generator.
-- [ ] **T9.3**: Run all tests with `node --test test/**/*.test.js`. Verify all pass.
-- [ ] **T9.4**: Write a demo gopherhole content map. Include directories, text files, info lines, and a search server stub.
-- [ ] **T9.5**: Update terminal UI to use demo gopherhole by default (if no URL provided).
-- [ ] **T9.6**: Update static generator to use demo gopherhole by default.
-- [ ] **T9.7**: Manual end-to-end test: start MCP server, use an MCP client (e.g., Claude Desktop) to call `gopher_browse`, verify response.
-- [ ] **T9.8**: Manual end-to-end test: run terminal UI, navigate through demo gopherhole, verify rendering and navigation.
-- [ ] **T9.9**: Manual end-to-end test: generate HTML for demo gopherhole, open in browser, verify appearance.
-- [ ] **T9.10**: Review all code for CRLF correctness. Ensure all outgoing requests and responses use `\r\n`.
+- [x] **T9.1**: Create `package.json` with metadata (name, version, description, author, license). Leave `dependencies: {}` empty. Add `scripts` for running tests.
+- [x] **T9.2**: Write `README.md` with installation instructions, usage examples for MCP server, terminal UI, and static generator.
+- [x] **T9.3**: Run all tests with `node --test test/**/*.test.js`. Verify all pass.
+- [x] **T9.4**: Write a demo gopherhole content map. Include directories, text files, info lines, and a search server stub.
+- [x] **T9.5**: Update terminal UI to use demo gopherhole by default (if no URL provided).
+- [x] **T9.6**: Update static generator to use demo gopherhole by default.
+- [x] **T9.7**: Manual end-to-end test: start MCP server, use an MCP client (e.g., Claude Desktop) to call `gopher_browse`, verify response.
+- [x] **T9.8**: Manual end-to-end test: run terminal UI, navigate through demo gopherhole, verify rendering and navigation.
+- [x] **T9.9**: Manual end-to-end test: generate HTML for demo gopherhole, open in browser, verify appearance.
+- [x] **T9.10**: Review all code for CRLF correctness. Ensure all outgoing requests and responses use `\r\n`.
 
 ## Phase 10: Documentation and Submission Prep
 

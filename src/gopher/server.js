@@ -25,10 +25,25 @@ export function createGopherServer(contentMap, port = 0) {
         if (requestData.includes('\n')) {
           // Extract the selector (everything before the first CRLF or LF)
           const lines = requestData.split(/\r?\n/);
-          const selector = lines[0];
+          const rawSelector = lines[0];
           
-          // Look up the content
-          const content = contentMap[selector];
+          // Check for search query (selector with tab)
+          let selector = rawSelector;
+          let query = null;
+          const tabIndex = rawSelector.indexOf('\t');
+          if (tabIndex !== -1) {
+            selector = rawSelector.slice(0, tabIndex);
+            query = rawSelector.slice(tabIndex + 1);
+          }
+          
+          // Look up the content. The root selector is the empty string (RFC 1436), but
+          // gopherholes in the wild also write it as "/", and a selector written without its
+          // leading slash names the same node, so try those spellings before giving up.
+          const content =
+            contentMap[selector] ??
+            (selector === '' ? contentMap['/'] : undefined) ??
+            (selector === '/' ? contentMap[''] : undefined) ??
+            contentMap[selector.startsWith('/') ? selector.slice(1) : `/${selector}`];
           
           if (!content) {
             // Send error response
@@ -42,9 +57,22 @@ export function createGopherServer(contentMap, port = 0) {
           if (content.type === 'menu') {
             serveMenu(socket, content.items);
           } else if (content.type === 'text') {
-            serveText(socket, content.content);
+            // Support both 'content' (old) and 'lines' (new) formats
+            const textContent = content.lines ? content.lines.join('\n') : content.content;
+            serveText(socket, textContent);
           } else if (content.type === 'binary') {
             serveBinary(socket, content.data);
+          } else if (content.type === 'search') {
+            // Handle search query
+            if (query && content.handler) {
+              const results = content.handler(query);
+              serveMenu(socket, results);
+            } else {
+              // No query provided, show search prompt
+              const promptLine = `iEnter a search query${CRLF}`;
+              socket.write(promptLine);
+              socket.end();
+            }
           } else {
             // Unknown type, send error
             const errorLine = `3Unknown content type${CRLF}`;

@@ -78,12 +78,17 @@ test('gopherFetch handles missing document', async () => {
 
 test('gopherSearch appends query to selector', async () => {
   const contentMap = {
-    '/search\tgopher': {
-      type: 'menu',
-      items: [
-        { type: '0', display: 'Gopher Protocol RFC', selector: '/rfc1436.txt', host: 'example.com', port: 70 },
-        { type: '1', display: 'Gopher Servers', selector: '/servers', host: 'example.com', port: 70 }
-      ]
+    '/search': {
+      type: 'search',
+      handler: (query) => {
+        if (query === 'gopher') {
+          return [
+            { type: '0', display: 'Gopher Protocol RFC', selector: '/rfc1436.txt', host: 'example.com', port: 70 },
+            { type: '1', display: 'Gopher Servers', selector: '/servers', host: 'example.com', port: 70 }
+          ];
+        }
+        return [];
+      }
     }
   };
   
@@ -103,9 +108,11 @@ test('gopherSearch appends query to selector', async () => {
 
 test('gopherSearch handles no results', async () => {
   const contentMap = {
-    '/search\tnonexistent': {
-      type: 'menu',
-      items: []
+    '/search': {
+      type: 'search',
+      handler: (query) => {
+        return [];
+      }
     }
   };
   

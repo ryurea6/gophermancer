@@ -104,7 +104,11 @@ export function parseUrl(url) {
   if (pathPart.length > 0) {
     // First character might be the item type
     itemType = pathPart[0];
-    selector = pathPart.slice(1);
+    // Everything after the type is the selector
+    // If the path is just "1/" or "1", the selector should be empty
+    const rest = pathPart.slice(1);
+    // Remove leading slash if it's the only thing left (root selector)
+    selector = rest === '/' ? '' : rest;
   }
   
   return {
