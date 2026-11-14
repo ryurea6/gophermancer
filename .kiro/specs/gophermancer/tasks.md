@@ -4,33 +4,33 @@ Tasks are grouped into phases. Each task is small enough to complete and verify 
 
 ## Phase 1: Gopher Wire Protocol
 
-- [ ] **T1.1**: Write `src/gopher/codec.js` with `encodeRequest(selector)` and `decodeLines(buffer)` functions. Enforce CRLF in encoding. Accept CRLF or LF in decoding.
-- [ ] **T1.2**: Write tests for codec in `test/gopher/codec.test.js`. Verify CRLF encoding, LF tolerance, and empty selector handling.
-- [ ] **T1.3**: Write `src/gopher/parser.js` with `parseMenu(lines)` function. Extract type, display, selector, host, port from tab-separated lines.
-- [ ] **T1.4**: Write tests for menu parser in `test/gopher/parser.test.js`. Test valid menu, malformed lines (missing tabs), and empty lines.
-- [ ] **T1.5**: Add `parseText(lines)` to `parser.js`. Stop at the `.` terminator. Do not treat other lines starting with `.` as terminators.
-- [ ] **T1.6**: Write tests for text parser in `test/gopher/parser.test.js`. Test terminator handling and lines starting with `.profile` or similar.
+- [x] **T1.1**: Write `src/gopher/codec.js` with `encodeRequest(selector)` and `decodeLines(buffer)` functions. Enforce CRLF in encoding. Accept CRLF or LF in decoding.
+- [x] **T1.2**: Write tests for codec in `test/gopher/codec.test.js`. Verify CRLF encoding, LF tolerance, and empty selector handling.
+- [x] **T1.3**: Write `src/gopher/parser.js` with `parseMenu(lines)` function. Extract type, display, selector, host, port from tab-separated lines.
+- [x] **T1.4**: Write tests for menu parser in `test/gopher/parser.test.js`. Test valid menu, malformed lines (missing tabs), and empty lines.
+- [x] **T1.5**: Add `parseText(lines)` to `parser.js`. Stop at the `.` terminator. Do not treat other lines starting with `.` as terminators.
+- [x] **T1.6**: Write tests for text parser in `test/gopher/parser.test.js`. Test terminator handling and lines starting with `.profile` or similar.
 
 ## Phase 2: Gopher Client
 
-- [ ] **T2.1**: Write `src/gopher/client.js` with `fetch(host, port, selector)` function. Use `node:net` to connect, send encoded request, read response until EOF, return raw buffer.
-- [ ] **T2.2**: Write tests for client in `test/gopher/client.test.js`. Test successful fetch (requires in-process server).
-- [ ] **T2.3**: Add timeout handling to `client.js`. Default 10 seconds. If timeout, destroy socket and reject with error.
-- [ ] **T2.4**: Add error handling to `client.js`. Catch DNS, connection refused, and other errors. Return descriptive error messages.
-- [ ] **T2.5**: Write tests for client error handling. Test connection refused (port 1), timeout (mock slow server), and invalid hostname.
-- [ ] **T2.6**: Add `parseUrl(gopherUrl)` helper to `client.js`. Parse `gopher://host:port/typeSelector` into `{ host, port, itemType, selector }`. Default port 70, default type 1.
-- [ ] **T2.7**: Write tests for URL parsing. Test valid URLs, missing port, missing type, and invalid schemes.
+- [x] **T2.1**: Write `src/gopher/client.js` with `fetch(host, port, selector)` function. Use `node:net` to connect, send encoded request, read response until EOF, return raw buffer.
+- [x] **T2.2**: Write tests for client in `test/gopher/client.test.js`. Test successful fetch (requires in-process server).
+- [x] **T2.3**: Add timeout handling to `client.js`. Default 10 seconds. If timeout, destroy socket and reject with error.
+- [x] **T2.4**: Add error handling to `client.js`. Catch DNS, connection refused, and other errors. Return descriptive error messages.
+- [x] **T2.5**: Write tests for client error handling. Test connection refused (port 1), timeout (mock slow server), and invalid hostname.
+- [x] **T2.6**: Add `parseUrl(gopherUrl)` helper to `client.js`. Parse `gopher://host:port/typeSelector` into `{ host, port, itemType, selector }`. Default port 70, default type 1.
+- [x] **T2.7**: Write tests for URL parsing. Test valid URLs, missing port, missing type, and invalid schemes.
 
 ## Phase 3: Gopher Server
 
-- [ ] **T3.1**: Write `src/gopher/server.js` with `createServer(contentMap, port)` function. Listen on the given port, accept connections, read selector, serve response, close connection.
-- [ ] **T3.2**: Implement menu serving in `server.js`. Format each item as `{type}{display}\t{selector}\t{host}\t{port}\r\n` and send.
-- [ ] **T3.3**: Implement text serving in `server.js`. Send each line with `\r\n`, then send `.\r\n` terminator.
-- [ ] **T3.4**: Implement binary serving in `server.js`. Send raw bytes, no terminator.
-- [ ] **T3.5**: Implement error serving in `server.js`. If selector not found, send type 3 error line.
-- [ ] **T3.6**: Write tests for server in `test/gopher/server.test.js`. Start server on random port, connect with raw socket, request menu, verify response.
-- [ ] **T3.7**: Write tests for text serving. Request a text selector, verify terminator is present and correct.
-- [ ] **T3.8**: Write tests for error handling. Request nonexistent selector, verify type 3 error response.
+- [x] **T3.1**: Write `src/gopher/server.js` with `createServer(contentMap, port)` function. Listen on the given port, accept connections, read selector, serve response, close connection.
+- [x] **T3.2**: Implement menu serving in `server.js`. Format each item as `{type}{display}\t{selector}\t{host}\t{port}\r\n` and send.
+- [x] **T3.3**: Implement text serving in `server.js`. Send each line with `\r\n`, then send `.\r\n` terminator.
+- [x] **T3.4**: Implement binary serving in `server.js`. Send raw bytes, no terminator.
+- [x] **T3.5**: Implement error serving in `server.js`. If selector not found, send type 3 error line.
+- [x] **T3.6**: Write tests for server in `test/gopher/server.test.js`. Start server on random port, connect with raw socket, request menu, verify response.
+- [x] **T3.7**: Write tests for text serving. Request a text selector, verify terminator is present and correct.
+- [x] **T3.8**: Write tests for error handling. Request nonexistent selector, verify type 3 error response.
 
 ## Phase 4: MCP Server Foundation
 
